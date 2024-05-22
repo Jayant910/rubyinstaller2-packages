@@ -14,7 +14,13 @@ git remote add upstream 'https://github.com/Jayant910/rubyinstaller2-packages'
 git fetch --quiet upstream
 
 # Decrypt and import private sigature key
-deploy_enabled && (gpg --batch --passphrase "${GPGPASSWD}" --decrypt appveyor-key.asc.asc | gpg --import)
+deploy_enabled && (gpg --batch --passphrase "${GPGPASSWD}" --decrypt appveyor-key.asc.asc >> decrypted-key-file.asc)
+if [[ $? -ne 0 ]]; then
+    message "Decryption failed."
+    exit 1
+fi
+
+gpg --verbose --import < decrypted-key-file.asc
 
 # Detect
 if [ -z "${APPVEYOR_SCHEDULED_BUILD}" ]
