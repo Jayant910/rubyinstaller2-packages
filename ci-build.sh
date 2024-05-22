@@ -8,8 +8,8 @@
 cd "$(dirname "$0")"
 source 'ci-library.sh'
 deploy_enabled && mkdir artifacts
-git_config user.email 'ci@rubyinstaller.org'
-git_config user.name  'RubyInstaller2 Continuous Integration'
+git_config user.email 'jayant.gaur24@gmail.com'
+git_config user.name  'Jayant910'
 git remote add upstream 'https://github.com/Jayant910/rubyinstaller2-packages'
 git fetch --quiet upstream
 
