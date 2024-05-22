@@ -10,7 +10,7 @@ source 'ci-library.sh'
 deploy_enabled && mkdir artifacts
 git_config user.email 'ci@rubyinstaller.org'
 git_config user.name  'RubyInstaller2 Continuous Integration'
-git remote add upstream 'https://github.com/oneclick/rubyinstaller2-packages'
+git remote add upstream 'https://github.com/Jayant910/rubyinstaller2-packages'
 git fetch --quiet upstream
 
 # Decrypt and import private sigature key
@@ -30,7 +30,7 @@ fi
 define_build_order || failure 'Could not determine build order'
 message 'Building packages' "${packages[@]}"
 
-execute 'Add [ci.ri2] respository to pacman.conf' add_ci_ri2_repo
+execute 'Add [test_tag] respository to pacman.conf' add_ci_ri2_repo
 
 # Build
 execute 'Approving recipe quality' check_recipe_quality
