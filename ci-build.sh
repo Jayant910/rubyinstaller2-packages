@@ -14,6 +14,14 @@ git remote add upstream 'https://github.com/Jayant910/rubyinstaller2-packages'
 git fetch --quiet upstream
 
 # Decrypt and import private sigature key
+
+export GPG_TTY=$(tty)
+
+# Ensure pinentry-tty is used for passphrase prompts
+echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
+gpgconf --kill gpg-agent
+gpgconf --launch gpg-agent
+
 deploy_enabled && (gpg --batch --passphrase "${GPGPASSWD}" --decrypt appveyor-key.asc.asc >> decrypted-key-file.asc)
 if [[ $? -ne 0 ]]; then
     message "Decryption failed."
